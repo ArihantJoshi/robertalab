@@ -35,6 +35,8 @@ define([ 'exports', 'util', 'log', 'message', 'guiState.model', 'socket.controll
             GUISTATE.program.name = 'NEPOprog';
             GUISTATE.program.shared = false;
             GUISTATE.program.toolbox.level = 'beginner';
+            
+            GUISTATE.group.name;
 
             LOG.info('init gui state');
             ready.resolve();
@@ -642,6 +644,16 @@ define([ 'exports', 'util', 'log', 'message', 'guiState.model', 'socket.controll
         GUISTATE.program.name = name;
     }
     exports.setProgramName = setProgramName;
+    
+    function getGroupName() {
+        return GUISTATE.group.name;
+    }
+    exports.getGroupName = getGroupName;
+    
+    function setGroupName(name) {
+        GUISTATE.group.name = name;
+    }
+    exports.setGroupName = setGroupName;
 
     function getConfigurationName() {
         return GUISTATE.configuration.name;
