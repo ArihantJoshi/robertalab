@@ -4,7 +4,7 @@ HOW TO GET AN OPENROBERTALAB INSTALLATION WITHOUT MUCH SETUP
 Variables used (set as needed!):
 export BRANCH=develop
 export GITREPO=~rbudde/git/robertalab
-export VERSION='2.5.3'
+export VERSION='2.5.4'
 export DISTR_DIR='/tmp/distr'
 export DB_PARENTDIR='/home/rbudde/db'
 export SERVER_PORT_ON_HOST=7000
@@ -31,7 +31,7 @@ Furthermore during image creation a maven build is executed to fill the /root/.m
 This makes later builds much faster.
 
 cd $GITREPO/Docker
-docker build -f DockerfileGen -t rbudde/openroberta_gen:1 --build-arg BRANCH=$BRANCH .
+docker build -f DockerfileGen -t rbudde/openroberta_gen:$BRANCH-1 --build-arg BRANCH=$BRANCH .
 docker push rbudde/openroberta_gen:$BRANCH-1
 
 2. GENERATE THE "base" IMAGE. IT CONTAINS SOFTWARE FOR CROSSCOMPILATION. THIS IS DOCUMENTATION. YOU MUST NOT DO THIS.

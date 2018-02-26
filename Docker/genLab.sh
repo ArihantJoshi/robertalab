@@ -16,7 +16,7 @@ else
     echo "generating the version $VERSION"
 fi
 
-cd /opt
+cd /opt/robertalab
 git fetch https://github.com/OpenRoberta/robertalab.git
 
 cd /opt/robertalab/OpenRobertaParent
