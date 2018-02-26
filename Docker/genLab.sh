@@ -15,6 +15,8 @@ then
 else
     echo "generating the version $VERSION"
 fi
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+echo "operating on branch $BRANCH"
 
 cd /opt/robertalab
 git fetch --depth=1 https://github.com/OpenRoberta/robertalab.git
@@ -22,7 +24,6 @@ git fetch --depth=1 https://github.com/OpenRoberta/robertalab.git
 cd /opt/robertalab/OpenRobertaParent
 mvn clean install
 chmod +x RobotArdu/resources/linux/arduino-builder RobotArdu/resources/linux/tools-builder/ctags/5.8*/ctags
-
 
 cd /opt/robertalab
 rm -rf DockerInstallation
@@ -34,10 +35,10 @@ cp -r OpenRobertaParent/OpenRobertaServer/db-$VERSION DockerInstallation
 cp Docker/Dockerfile* Docker/*.sh DockerInstallation
 
 cd /opt/robertalab/DockerInstallation
-docker build -t rbudde/openroberta_lab:$VERSION -f DockerfileLab .
-docker build --build-arg version=$VERSION -t rbudde/openroberta_db:$VERSION -f DockerfileDb .
+docker build -t rbudde/openroberta_lab:$BRANCH-$VERSION -f DockerfileLab .
+docker build --build-arg version=$BRANCH-$VERSION -t rbudde/openroberta_db:$VERSION -f DockerfileDb .
 
-docker build -t rbudde/openroberta_upgrade:$VERSION -f DockerfileUpgrade .
+docker build -t rbudde/openroberta_upgrade:$BRANCH-$VERSION -f DockerfileUpgrade .
 
-docker build -t rbudde/openroberta_embedded:$VERSION -f DockerfileLabEmbedded .
-docker build --build-arg version=$VERSION -t rbudde/openroberta_emptydbfortest:$VERSION -f DockerfileDbEmptyForTest .
+docker build -t rbudde/openroberta_embedded:$BRANCH-$VERSION -f DockerfileLabEmbedded .
+docker build --build-arg version=$VERSION -t rbudde/openroberta_emptydbfortest:$BRANCH-$VERSION -f DockerfileDbEmptyForTest .
