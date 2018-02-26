@@ -18,11 +18,6 @@ RUN apt-get install -y docker-ce
 
 RUN apt-get update && apt-get install -y git maven && apt-get clean
 
-# prepare the entry point
-WORKDIR /opt
-COPY ["./genLab.sh","./"]
-RUN chmod +x ./genLab.sh
-
 # shallow clone of develop. Branch defaults to "develop". Run mvn once to install most all the artifacts needed in /root/.m2
 WORKDIR /opt
 ARG BRANCH=develop
@@ -32,5 +27,9 @@ RUN echo "cloning branch $BRANCH" && \
     mvn clean install && \
     chmod +x RobotArdu/resources/linux/arduino-builder RobotArdu/resources/linux/tools-builder/ctags/5.8*/ctags
 
+# prepare the entry point
+WORKDIR /opt
+COPY ["./genLab.sh","./"]
+RUN chmod +x ./genLab.sh
 WORKDIR /opt/robertalab/OpenRobertaParent
 ENTRYPOINT ["/opt/genLab.sh"]

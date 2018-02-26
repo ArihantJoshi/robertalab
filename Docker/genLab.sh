@@ -17,7 +17,7 @@ else
 fi
 
 cd /opt/robertalab
-git fetch https://github.com/OpenRoberta/robertalab.git
+git fetch --depth=1 https://github.com/OpenRoberta/robertalab.git
 
 cd /opt/robertalab/OpenRobertaParent
 mvn clean install
